@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>MOVE ROBOT</title>
+
+
+<style>
+#container {
+    margin: 0px auto;
+    width: 500px;
+    height: 375px;
+    border: 10px #333 solid;
+}
+#videoElement {
+    width: 500px;
+    height: 375px;
+    background-color: #666;
+}
+</style>
+
+</head>
+<body>
+<!-- This is just for aesthetics, centering the
+content within the paragraph -->
+<iframe src="http://localhost/Webcam/controls.html" align="middle" frameborder="0" height="500px" width="450px"></iframe>
+
+<div id="container" style="float: left;">
+    <video autoplay="true" id="videoElement">
+     
+    </video>
+</div>
+<script>
+var video = document.querySelector("#videoElement");
+ 
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+ 
+if (navigator.getUserMedia) {       
+    navigator.getUserMedia({video: true}, handleVideo, videoError);
+}
+ 
+function handleVideo(stream) {
+    video.src = window.URL.createObjectURL(stream);
+}
+ 
+function videoError(e) {
+    // do something
+} 
+
+</script>
+
+ 
+<table align="center">
+	<tr>
+		<td colspan="3" align="center"><a href="led.php?state=1"><img src="up-arrow.png"/></a></td>
+	</tr>
+	<tr>
+		<td><a href="led.php?state=3"><img src="left-arrow.png"/></a></td>
+		<td><a href="led.php?state=5"><img src="stop.png"/></a></td>
+		<td><a href="led.php?state=4"><img src="right-arrow.png"/></a></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center"><a href="led.php?state=2"><img src="down-arrow.png"/></a></td>
+	</tr>
+</table>
+</body> 	
+
+
+</html>

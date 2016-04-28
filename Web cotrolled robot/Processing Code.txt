@@ -1,0 +1,34 @@
+PROCESSING CODE
+import processing.serial.*;
+ Serial port;
+  void setup()  {
+    /* This part must be altered to fit your local settings. The number in brackets after "Serial.list()" is where you declare what COM port your Arduino is connected to.
+      If you get error messages, try a different number starting from 0 (e.g. 0, 1, 2, 3...) . */
+    //port = new Serial(this, Serial.list()[1], 9600);  // Open the port that the Arduino board is connected to, at 9600 baud
+    port = new Serial(this, "COM18", 9600);  // Open the port that the Arduino board is connected to, at 9600 baud
+ }
+ void draw() {
+   String onoroff[] = loadStrings("http://softysolutions.in/scoe/LEDstate.txt"); // Insert the location of your .txt file
+ // print(onoroff[0]);  // Prints whatever is in the file ("1" or "0")
+   if (onoroff[0].equals("1") == true) {
+    println(" - TELLING ARDUINO TO MOVE FORWARD");
+    port.write('W'); // Send "H" over serial to set LED to HIGH
+   }
+  else if (onoroff[0].equals("2") == true) {
+    println(" - TELLING ARDUINO TO MOVE REVERSE");
+    port.write('S'); // Send "H" over serial to set LED to HIGH
+   }
+  else if (onoroff[0].equals("3") == true) {
+    println(" - TELLING ARDUINO TO MOVE LEFT");
+    port.write('A'); // Send "H" over serial to set LED to HIGH
+   }
+  else if (onoroff[0].equals("4") == true) {
+    println(" - TELLING ARDUINO TO MOVE RIGHT");
+    port.write('D'); // Send "H" over serial to set LED to HIGH
+   }
+  else {
+     println(" - TELLING ARDUINO TO STOP");
+    port.write('X');  // Send "L" over serial to set LED to LOW
+ }
+   delay(1000); // Set your desired interval here, in milliseconds
+ }
